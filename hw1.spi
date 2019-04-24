@@ -1,0 +1,20 @@
+directive sample 0.1
+directive plot W();X();Y();Z();Ezm4();Ezm5();Ezm6()
+
+new chw@1.0:chan
+new chx@1.0:chan
+new chy@1.0:chan
+new pos@1.0:chan
+
+let W()=?chw;X()
+and Ezm4()=!chw;Ezm4()
+
+and X()=!chx;Y()
+and Ezm5()=do ?chx;Ezm5() or ?pos;?chx;(Ezm5() | Ezm5())
+
+and Y()=!chy;Z()
+and Ezm6()=?chy;Ezm6()
+
+and Z()=!pos;Z()
+
+run(1000 of W() | 1 of Ezm4()| 1 of Ezm5()| 1 of Ezm6())
